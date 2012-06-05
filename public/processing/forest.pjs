@@ -199,7 +199,7 @@ void setup(){
 			z = 21;
 		else
 			z = 0;
-		trees[i] = new Tree(random(100)+sleft+10+((i%10)*90),sbottom,0.04,z,min( ((i%10)*26)+50 ,220));
+		trees[i] = new Tree(random(100)+sleft+10+((i%10)*90),sbottom,0.04,z,min( ((i%10)*26)+50 ,210));
 	}
 	horseman = new Horseman(1100,sbottom-34);
 	smooth();

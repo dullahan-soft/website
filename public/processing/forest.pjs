@@ -2,14 +2,18 @@
 /* @pjs preload="/processing/horseman-full.png"; */
 float timer,delta;
 
+float sbottom = 310;
+float sleft  = 300;
+float sright = 1275;
+
 class Tree{
 	public float x,y,dy,top,maxTop,trunk,leafshadow,z;
-	Tree(float newX,float newY,float newDy,float newZ){
+	Tree(float newX,float newY,float newDy,float newZ,int topSeed){
 		z = newZ;
 		x = newX;;
 		top = y = newY - z;
 		dy = newDy + ((float)random(9))/100.0;
-		maxTop = y - random(200) - 50;
+		maxTop = y - random(topSeed) - 50;
 		trunk = random(9)+2;
 		leafshadow = random(10);
 	}
@@ -56,31 +60,30 @@ class Horseman{
 		timer = millis();
 		left = true;
 		savedDx = 0.0;
-		thewait = 200;
-		
+	
 		run();
 	}
 	void draw(d){
-		if(x < 403+55 && animState != TURNING){
+		if(x < sleft+55 && animState != TURNING){
 			walk();
 		}
-		else if(x > 1375-55 && animState != TURNING){
+		else if(x > sright-55 && animState != TURNING){
 			walk();
 		}
 		else if(animState != TURNING){
 			run();
 		}
 		
-		if(x < 403){
-			x = 404;
+		if(x < sleft+3){
+			x = sleft+4;;
 			turn();
 		}
-		else if(x > 1375){
-			x = 1374;
+		else if(x > sright-30){
+			x = sright-31;
 			turn();
 		}else{
 			x += dx*d;
-			if(millis()-timer > thewait){
+			if(millis()-timer > 200){
 				if(left){
 					cur_frame += 1;
 				}else{
@@ -186,7 +189,7 @@ Tree trees[];
 Horseman horseman;
 
 void setup(){
-	size(1500,500);
+	size(1300,500);
 	background(255);
 	frameRate(30);
 
@@ -196,9 +199,9 @@ void setup(){
 			z = 21;
 		else
 			z = 0;
-		trees[i] = new Tree(random(100)+400+((i%10)*100),400,0.04,z);
+		trees[i] = new Tree(random(100)+sleft+10+((i%10)*90),sbottom,0.04,z,min( ((i%10)*26)+50 ,220));
 	}
-	horseman = new Horseman(1300,400-34);
+	horseman = new Horseman(1100,sbottom-34);
 	smooth();
 	timer = millis();
 }
@@ -214,7 +217,7 @@ void draw(){
 	}
 	noStroke();
 	fill(90,90,90);
-	quad(400,400,1400,400,1400-10,400-21,400+10,400-21);
+	quad(sleft,sbottom,sright,sbottom,sright-10,sbottom-21,sleft+10,sbottom-21);
 	horseman.draw(delta);
 	for(int i=trees.length/2;i < trees.length; i++){
 		trees[i].draw(delta);

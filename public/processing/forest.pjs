@@ -1,5 +1,5 @@
-/* @pjs preload="/processing/horseman-with-cape-flipped.png"; */
-
+/* @pjs preload="/processing/horseman-full-flipped.png"; */
+/* @pjs preload="/processing/horseman-full.png"; */
 float timer,delta;
 
 class Tree{

@@ -28,7 +28,22 @@ class Tree{
 	}
 }
 
+class Horseman{
+	public float x,y,dx;
+	Horseman(float newX,float newY,float newDx){
+		x = newX;
+		y = newY;
+		dx = newDx;
+	}
+	void draw(d){
+		x += dx*d;
+		fill(0);
+		ellipse(x,y,10,10);
+	}
+}
+
 Tree trees[];
+Horseman horseman;
 
 void setup(){
 	size(1500,500);
@@ -41,8 +56,9 @@ void setup(){
 			z = 21;
 		else
 			z = 0;
-		trees[i] = new Tree(random(1500-450)+400,400,0.04,z);
+		trees[i] = new Tree(random(100)+400+((i%10)*100),400,0.04,z);
 	}
+	horseman = new Horseman(1550,400-10,-0.06);
 	smooth();
 	timer = millis();
 }
@@ -53,7 +69,14 @@ void draw(){
 
 	background(255);
 
-	for(int i=0;i < trees.length; i++){
+	for(int i=0;i < trees.length/2; i++){
+		trees[i].draw(delta);
+	}
+	noStroke();
+	fill(90,90,90);
+	quad(400,400,1400,400,1400-10,400-21,400+10,400-21);
+	horseman.draw(delta);
+	for(int i=trees.length/2;i < trees.length; i++){
 		trees[i].draw(delta);
 	}
 }

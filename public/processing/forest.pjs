@@ -1,0 +1,49 @@
+float timer,delta;
+
+class Tree{
+	public float x,y,dy,top,maxTop;
+	Tree(float newX,float newY,float newDy){
+		x = newX;
+		top = y = newY;
+		dy = newDy + ((float)random(10))/100.0;
+		maxTop = y - random(200) - 50;
+	}
+
+	void draw(float d){
+		if(top > maxTop)
+			top -= (dy)*d;
+		else
+			triangle(x-32,top-((top-y)*0.8),x,top,x+32,top-((top-y)*0.8));
+		line(x,y,x,top);
+	}
+}
+
+Tree trees[];
+
+void setup(){
+	size(1500,500);
+	background(255);
+	frameRate(30);
+
+	trees = new Tree[24];
+	for(int i=0;i < trees.length; i++){
+		trees[i] = new Tree(random(1500-350)+300,400,0.03);
+	}
+
+	timer = millis();
+}
+
+void draw(){
+	delta = millis() - timer;
+	timer = millis();
+
+	background(255);
+
+	fill(51,51,51);
+	stroke(51,51,51);
+	strokeWeight(2);
+
+	for(int i=0;i < trees.length; i++){
+		trees[i].draw(delta);
+	}
+}

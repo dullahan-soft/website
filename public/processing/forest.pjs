@@ -1,19 +1,27 @@
 float timer,delta;
 
 class Tree{
-	public float x,y,dy,top,maxTop;
+	public float x,y,dy,top,maxTop,trunk,leafshadow;
 	Tree(float newX,float newY,float newDy){
 		x = newX;
 		top = y = newY;
-		dy = newDy + ((float)random(10))/100.0;
+		dy = newDy + ((float)random(9))/100.0;
 		maxTop = y - random(200) - 50;
+		trunk = random(9)+2;
+		leafshadow = random(10);
 	}
 
 	void draw(float d){
+		strokeWeight(1);
 		if(top > maxTop)
 			top -= (dy)*d;
-		else
-			triangle(x-32,top-((top-y)*0.8),x,top,x+32,top-((top-y)*0.8));
+		else{
+			fill(51,51,51);
+			triangle(x-32,top-((top-y)*0.8),x,top-34,x+32,top-((top-y)*0.8));
+			fill(12,12,12);
+			triangle(x+20-leafshadow,top-((top-y)*0.8),x,top-34,x+32,top-((top-y)*0.8));
+		}
+		strokeWeight(trunk);
 		line(x,y,x,top);
 	}
 }
@@ -27,7 +35,7 @@ void setup(){
 
 	trees = new Tree[24];
 	for(int i=0;i < trees.length; i++){
-		trees[i] = new Tree(random(1500-350)+300,400,0.03);
+		trees[i] = new Tree(random(1500-350)+300,400,0.04);
 	}
 
 	timer = millis();
@@ -38,10 +46,7 @@ void draw(){
 	timer = millis();
 
 	background(255);
-
-	fill(51,51,51);
 	stroke(51,51,51);
-	strokeWeight(2);
 
 	for(int i=0;i < trees.length; i++){
 		trees[i].draw(delta);

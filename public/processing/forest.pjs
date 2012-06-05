@@ -43,7 +43,7 @@ void setup(){
 			z = 0;
 		trees[i] = new Tree(random(1500-450)+400,400,0.04,z);
 	}
-
+	smooth();
 	timer = millis();
 }
 

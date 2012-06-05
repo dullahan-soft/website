@@ -2,9 +2,9 @@
 /* @pjs preload="/processing/horseman-full.png"; */
 float timer,delta;
 
-float sbottom = 310;
-float sleft  = 300;
-float sright = 1275;
+float sbottom = 310+89;
+float sleft  = 300+89;
+float sright = 1275+89;
 
 class Tree{
 	public float x,y,dy,top,maxTop,trunk,leafshadow,z;
@@ -189,7 +189,7 @@ Tree trees[];
 Horseman horseman;
 
 void setup(){
-	size(1300,500);
+	size(1400,500);
 	background(255);
 	frameRate(30);
 

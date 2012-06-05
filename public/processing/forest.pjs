@@ -37,45 +37,149 @@ class Horseman{
 	private PImage sprite,sprite_leftward,sprite_rightward;
 	private boolean left;
 	private float timer;
-	Horseman(float newX,float newY,float newDx){
+	private float savedDx;
+
+	private int animState;
+	private final int WALKING = 0;
+	private final int RUNNING = 1;
+  private final int TURNING = 2;
+
+	private float thewait;
+
+	Horseman(float newX,float newY){
 		cur_frame = 0;
 		x = newX;
 		y = newY;
-		dx = newDx;
-		sprite_leftward = loadImage("/processing/horseman-with-cape.png");
-		sprite_rightward = loadImage("/processing/horseman-with-cape-flipped.png");
+		dx = -0.04;
+		sprite_leftward = loadImage("/processing/horseman-full.png");
+		sprite_rightward = loadImage("/processing/horseman-full-flipped.png");
 		sprite = sprite_leftward;
 		timer = millis();
 		left = true;
+		savedDx = 0.0;
+		thewait = 200;
+		
+		run();
 	}
 	void draw(d){
+		if(x < 403+55 && animState != TURNING){
+			walk();
+		}
+		else if(x > 1375-55 && animState != TURNING){
+			walk();
+		}
+		else if(animState != TURNING){
+			run();
+		}
+		
 		if(x < 403){
-			dx *= -1.0;
-			x = 403;
-			sprite = sprite_rightward;
-			left = false;
-		}else if(x > 1375){
-			dx *= -1.0;
-			x = 1375;
-			sprite = sprite_leftward;
-			left = true;
+			x = 404;
+			turn();
 		}
-		x += dx*d;
-		if(millis()-timer > 200){
-			if(left){
-			  cur_frame += 1;
-			}else{
-				cur_frame -= 1;
+		else if(x > 1375){
+			x = 1374;
+			turn();
+		}else{
+			x += dx*d;
+			if(millis()-timer > thewait){
+				if(left){
+					cur_frame += 1;
+				}else{
+					cur_frame -= 1;
+				}
+				timer = millis();
 			}
-			timer = millis();
 		}
-		if(cur_frame > 3){
-			cur_frame = 0;
+		
+		if(left){
+			if(animState == WALKING){
+				/* 5,6 */
+				if(cur_frame < 5){
+					cur_frame = 6;
+				}
+				if(cur_frame > 6){
+					cur_frame = 5;
+				}
+			}
+			else if(animState == RUNNING){
+				/* 0,1,2,3 */
+				if(cur_frame < 0){
+					cur_frame = 3;
+				}
+				if(cur_frame > 3){
+					cur_frame = 0;
+				}
+			}
+			else if(animState == TURNING){
+				/* 7,8 */
+				if(cur_frame < 7){
+					cur_frame = 7;
+				}
+				if(cur_frame > 8){
+					unturn();
+				}
+			}
 		}
-		if(cur_frame < 0){
+		else{
+			if(animState == WALKING){
+				/* 3,2 */
+				if(cur_frame < 2){
+					cur_frame = 3;
+				}
+				if(cur_frame > 3){
+					cur_frame = 2;
+				}
+			}
+			else if(animState == RUNNING){
+				/* 8,7,6,5 */
+				if(cur_frame < 5){
+					cur_frame = 8;
+				}
+				if(cur_frame > 8){
+					cur_frame = 5;
+				}
+			}
+			else if(animState == TURNING){
+				/* 1,0 */
+				if(cur_frame < 0){
+					unturn();
+				}
+				if(cur_frame > 1){
+					cur_frame = 1;
+				}
+			}
+		}
+		
+		image(sprite.get(cur_frame*32,0,32,32),x,y);
+	}
+
+	private void walk(){
+		dx = dx < 0 ? -0.04 : 0.04;
+		animState = WALKING;
+	}
+	private void run(){
+		dx = dx < 0 ? -0.08 : 0.08;
+		animState = RUNNING;
+	}
+	private void turn(){
+		savedDx = dx;
+		dx = 0.0;
+		animState = TURNING;
+		y += 2;
+	}
+	private void unturn(){
+		dx = savedDx*-0.1;
+		animState = WALKING;
+		y -= 2;
+		left = !left;
+		if(left){
+			sprite = sprite_leftward;
+			cur_frame = 5;
+		}
+		else{
+			sprite = sprite_rightward;
 			cur_frame = 3;
 		}
-		image(sprite.get(cur_frame*32,0,32,32),x,y);
 	}
 }
 
@@ -95,7 +199,7 @@ void setup(){
 			z = 0;
 		trees[i] = new Tree(random(100)+400+((i%10)*100),400,0.04,z);
 	}
-	horseman = new Horseman(1300,400-34,-0.08);
+	horseman = new Horseman(1300,400-34);
 	smooth();
 	timer = millis();
 }

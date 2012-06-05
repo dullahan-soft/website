@@ -1,4 +1,3 @@
-/* @pjs preload="/processing/horseman-with-cape.png"; */
 /* @pjs preload="/processing/horseman-with-cape-flipped.png"; */
 
 float timer,delta;

@@ -226,7 +226,7 @@ void createAnimation(){
 }
 
 void setup(){
-	size(window.innerWidth-55,max(window.innerHeight,400+55+60));
+	size(window.innerWidth-55,max(window.innerHeight,400+55+80));
 	createAnimation();
 }
 
@@ -250,6 +250,6 @@ void draw(){
 }
 
 void reSize(int w, int h) {
-	size(w, max(h,400+55+60));
+	size(w, max(h,400+55+80));
 	createAnimation();
 }

@@ -24,10 +24,11 @@
 
 			}
 		</style>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script src="/js/processing.min.js"></script>
   </head>
   <body>
-		<canvas id="processing-canvas" datasrc="/processing/forest.pjs" resize="" tabindex="0" width="1600" height="800"></canvas>
+		<canvas id="processing-canvas" data-processing-sources="/processing/forest.pjs" resize="" tabindex="0" width="0" height="0"></canvas>
 			<div class="content">			
 				<h1 style="font-size:54px;">Dullahan Software</h1>
 			  <p  style="padding-top:8px;" class="lead">Embedded, mobile, and web applications.</p>
@@ -58,5 +59,20 @@
 			</section>
 			-->
     </div>
+		<script>
+			$(window).resize(function(){
+				//processing.size(window.innerWidth,window.innerHeight);
+				$("#processing-canvas").attr("width", window.innerWidth-55);
+				$("#processing-canvas").attr("height",window.innerHeight);
+        var instance = Processing.getInstanceById('processing-canvas');
+				instance.reSize(window.innerWidth-55,window.innerHeight);
+			});
+			$.ready(function(){
+				$("#processing-canvas").attr("width", window.innerWidth-55);
+				$("#processing-canvas").attr("height",window.innerHeight);
+   			var instance = Processing.getInstanceById('processing-canvas');
+				instance.reSize(window.innerWidth-55,window.innerHeight);
+			});
+		</script>
   </body>
 </html>

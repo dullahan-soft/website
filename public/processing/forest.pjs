@@ -192,7 +192,12 @@ void createAnimation(){
 	background(255);
 	frameRate(30);
 
-	sright = max(window.innerWidth-55,250);
+	sright  = window.innerWidth-55;
+	sleft   = window.innerWidth*0.25;
+	/* the smaller the width the further we push the animation down*/
+	sbottom = window.innerHeight*0.66;
+	sbottom += window.innerWidth < 1200 ? 100 : 0;
+	sleft = window.innerWidth < 1200 ? 55 : sleft;
 	
 	int numTrees = (int)(sright/75);
 	numTrees = numTrees % 2 == 0 ? numTrees : numTrees + 1;
@@ -204,15 +209,18 @@ void createAnimation(){
 		else
 			z = 0;
 		
-		float randomness = random((window.innerWidth/numTrees)*0.5);
+		float randomness = random((window.innerWidth/numTrees)*0.6);
 		randomness *= random(100) >= 50 ? -1 : 1;
 		float adjustment = sleft + 10;
-		float z_adj = ((i%(numTrees/2))*1.5*((window.innerWidth-55)/numTrees))
+		float z_adj = ((i%(numTrees/2))*1.5*((window.innerWidth-55)/numTrees));
 
-		trees[i] = new Tree(max(min(randomness+adjustment+z_adj,window.innerWidth-89),sleft+10),sbottom,0.04,z,min( ((i%(numTrees/2))*27)+50 ,260));
+		float maxTreeHeight = window.innerHeight/2;
+		float heightMultiplier = maxTreeHeight/numTrees;
+
+		trees[i] = new Tree(max(min(randomness+adjustment+z_adj,window.innerWidth-55),sleft+10),sbottom,0.04,z,min( ((i%(numTrees/2))*heightMultiplier)+50,maxTreeHeight));
 	}
 	horseman = new Horseman(0.75*sright,sbottom-34);
-	//smooth();
+	smooth();
 	timer = millis();
 }
 

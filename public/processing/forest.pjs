@@ -195,10 +195,12 @@ void createAnimation(){
 	sright  = window.innerWidth-55;
 	sleft   = window.innerWidth*0.25;
 	/* the smaller the width the further we push the animation down*/
-	sbottom = window.innerHeight*0.66;
-	sbottom += window.innerWidth < 1200 ? 100 : 0;
-	sleft = window.innerWidth < 1200 ? 55 : sleft;
-	sbottom = max(400+55+60,sbottom);
+	sbottom = window.innerHeight*0.6;
+	if(window.innerWidth < 1200){
+		sbottom += 100;
+		sleft = 55;
+		sbottom = max(400+55+60,sbottom);
+	}
 	
 	int numTrees = (int)(sright/75);
 	numTrees = numTrees % 2 == 0 ? numTrees : numTrees + 1;

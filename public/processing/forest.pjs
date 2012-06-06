@@ -2,9 +2,9 @@
 /* @pjs preload="/processing/horseman-full.png"; */
 float timer,delta;
 
-float sbottom = 310+89;
-float sleft  = 300+89;
-float sright = 1275+89;
+float sbottom;// = 310+89;
+float sleft;//  = 300+89;
+float sright;// = 1275+89;
 
 class Tree{
 	public float x,y,dy,top,maxTop,trunk,leafshadow,z;
@@ -156,11 +156,11 @@ class Horseman{
 	}
 
 	private void walk(){
-		dx = dx < 0 ? -0.03 : 0.03;
+		dx = dx < 0 ? -0.02 : 0.02;
 		animState = WALKING;
 	}
 	private void run(){
-		dx = dx < 0 ? -0.07 : 0.07;
+		dx = dx < 0 ? -0.05 : 0.05;
 		animState = RUNNING;
 	}
 	private void turn(){
@@ -193,16 +193,16 @@ void createAnimation(){
 	frameRate(30);
 
 	sright  = window.innerWidth-55;
-	sleft   = window.innerWidth*0.25;
+	sleft   = 55;//window.innerWidth*0.25;
 	/* the smaller the width the further we push the animation down*/
 	sbottom = window.innerHeight*0.6;
 	if(window.innerWidth < 1200){
 		sbottom += 100;
 		sleft = 55;
-		sbottom = max(400+55+60,sbottom);
 	}
+	sbottom = max(400+55+60,sbottom);
 	
-	int numTrees = (int)(sright/75);
+	int numTrees = (int)(sright/50);
 	numTrees = numTrees % 2 == 0 ? numTrees : numTrees + 1;
 	trees = new Tree[numTrees];
 	
@@ -215,12 +215,13 @@ void createAnimation(){
 		float randomness = random((window.innerWidth/numTrees)*0.6);
 		randomness *= random(100) >= 50 ? -1 : 1;
 		float adjustment = sleft + 10;
-		float z_adj = ((i%(numTrees/2))*1.6*((window.innerWidth-55)/numTrees));
+		//float z_adj = ((i%(numTrees/2))*1.6*((window.innerWidth-55)/numTrees));
+		float z_adj = (i%(numTrees/2))*2*(sright-sleft)/numTrees;
 
 		float maxTreeHeight = window.innerHeight/2;
 		float heightMultiplier = maxTreeHeight/numTrees;
 
-		trees[i] = new Tree(max(min(randomness+adjustment+z_adj,window.innerWidth-89),sleft+10),sbottom,0.04,z,min( ((i%(numTrees/2))*heightMultiplier)+50,maxTreeHeight));
+		trees[i] = new Tree(max(min(randomness+adjustment+z_adj,window.innerWidth-55),sleft+10),sbottom,0.04,z,min( ((i%(numTrees/2))*heightMultiplier)+50,maxTreeHeight));
 	}
 	horseman = new Horseman(0.75*sright,sbottom-34);
 	smooth();

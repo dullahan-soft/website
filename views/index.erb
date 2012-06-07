@@ -16,12 +16,16 @@
 
 			.content {
 				margin: 0px;
-				padding: 55px;
-				width: 600px;
-				height: 400px;
+				padding: 144px;
+				padding-top:55px;
 				display: inline-block;
 				position: absolute;
-
+			}
+			.projects {
+				margin-top: 500px;
+				padding: 144px;
+				display: inline-block;
+				position: absolute;
 			}
 		</style>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
@@ -29,46 +33,59 @@
   </head>
   <body>
 		<canvas id="processing-canvas" data-processing-sources="/processing/forest.pjs" resize="" tabindex="0" width="0" height="0"></canvas>
+		<div class="row"><div class="span6">
 		<div class="content">			
 			<h1 style="font-size:54px;">Dullahan Software</h1>
 			 <p  style="padding-top:8px;" class="lead">Embedded, mobile, and web applications.</p>
 			<p><img src="/img/headless-horseman.png" /></p>
 			<p><a href="mailto:chris.cacciatore@dullahansoft.com">chris.cacciatore@dullahansoft.com</a></p>
 			<p><a href="https://twitter.com/#!/cacciatc">@cacciatc</a></p>
+		</div></div>
 		</div>
-		
-			<!--
-			<section style="padding-top:55px;">
-				<div class="row">
-					<div class="span4">
-						<h3 align="center">Projects</h3>
-						<dl>
-							<dt><a href="http://meteor-counting.heroku.com/" target="new"><img src="/img/meteor-count-thumb.png" /> Meteor Counter</a></dt>
-							<dd>A quick tutorial, an FM radio, and a tiny bit of software enables you to start counting falling stars even during the day.</dd>
-							<br/>
-							<dt><img src="/img/textabl-logo.png"/> Textabl (<a href="/pdf/textabl.pdf">PDF</a>)</dt>
-							<dd>A simple way to plan quick events.  You choose who to invite and we create a Facebook event page and invite your friends by text.  Built by a team of 5 in 48 hours at the June 2012 <a href="http://cerealhack.com/" target="new">Cereal Hack</a>.</dd>
-							<br/>
-							<dt><a href="http://www.infraredindustries.com/infraview/" target="new">Infraview</a></dt>
-							<dd>Created for Infrared Industries.  Advanced graphing and data logging for Infrared's line of gas analyzers.</dd>
-						</dl>
-					</div>
+		<section class="projects">
+			<div class="row">
+				<div class="span4">
+					<h2>Projects</h2>
+					<dl>
+						<dt><a href="http://meteor-counting.heroku.com/" target="new">Meteor Counter</a></dt>
+						<dd>A quick tutorial, an FM radio, and a tiny bit of software enables you to start counting falling stars even during the day.</dd>
+						<br/>
+						<dt>Textabl (<a href="/pdf/textabl.pdf">PDF</a>)</dt>
+						<dd>A simple way to plan quick events.  You choose who to invite and Textabl creates a Facebook event page and invites your friends by text.  Built by a team of 5 in 48 hours and won third place at the June 2012 Sacramento <a href="http://cerealhack.com/" target="new">Cereal Hack</a>.</dd>
+						<br/>
+						<dt><a href="https://my-cycle-tracks.heroku.com/sign_in" target="new">myCycleTracks</a></dt>
+						<dd>Deploy and manage your own customized version of SFCTA's open source <a href="http://www.sfcta.org/content/view/667/377/" target="new">CycleTracks</a> and start gathering bicycle route and usage data the same day.</dd>
+						<br/>
+						<dt><a href="http://www.infraredindustries.com/infraview/" target="new">Infraview</a></dt>
+						<dd>Created for Infrared Industries.  Advanced graphing and data logging for Infrared's line of gas analyzers.</dd>
+					</dl>
 				</div>
-			</section>
-			-->
-    </div>
+				<div class="span5">
+					<h2>Activity</h2>
+					<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
+  				<script src="/js/twitter-widget.js"></script>
+				</div>
+				<div class="span3">
+					<h2>Code</h2>
+					
+				</div>
+			</div>
+		</section>
+
 		<script>
-			$(window).resize(function(){
-				$("#processing-canvas").attr("width", window.innerWidth-55);
+			function resizeMe(){
+				$("#processing-canvas").attr("width", window.innerWidth);
 				$("#processing-canvas").attr("height",window.innerHeight);
         var instance = Processing.getInstanceById('processing-canvas');
-				instance.reSize(window.innerWidth-55,window.innerHeight);
+				if(instance != null)
+					instance.reSize(window.innerWidth,window.innerHeight);
+				$(".projects").css("margin-top",(parseInt($("#processing-canvas").attr("height"))-130)+"px");
+			}
+			$(window).resize(function(){
+				resizeMe();
 			});
-			$.ready(function(){
-				$("#processing-canvas").attr("width", window.innerWidth-55);
-				$("#processing-canvas").attr("height",window.innerHeight);
-   			var instance = Processing.getInstanceById('processing-canvas');
-				instance.reSize(window.innerWidth-55,window.innerHeight);
+			$(function(){
+				resizeMe();
 			});
 		</script>
   </body>

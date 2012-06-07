@@ -6,6 +6,62 @@ float sbottom;
 float sleft;
 float sright;
 
+float portalTimer;
+
+class Portal{
+	public float x,y,w,maxWidth,dw;
+
+	public final int NONE = 0;
+	public final int OPENING = 1;
+	public final int CLOSING = 2;
+	public final int STASIS = 3;
+
+	public int animState;
+	private float animtimer;
+
+	Portal(float newX,float newY){
+		x = newX;
+		y = newY;
+		w = 0;
+		maxWidth = 10;
+		dw = 0.01;
+		animState = OPENING;
+	}
+
+	public void closeup(){
+		animState = CLOSING;
+	}
+
+	void draw(float d){
+		if(animState == OPENING){
+			w += dw*d;
+			fill(255);
+			stroke(255);
+			ellipse(x,y,w*4,w);
+			if(w >= maxWidth){
+				animState = STASIS;
+			  animtimer = millis();
+			}
+		}
+		else if(animState == CLOSING){
+			w -= dw*d;
+			fill(255);
+			stroke(255);
+			ellipse(x,y,w*4,w);
+			if(w <= 0)
+				dw = 0.0;
+		}
+		else if(animState == STASIS){
+			fill(255);
+			stroke(255);
+			ellipse(x,y,w*4,w);
+			if(millis()-animtimer > 3000){
+				closeup();
+			}
+		}
+	}
+}
+
 class Tree{
 	public float x,y,dy,top,maxTop,trunk,leafshadow,z;
 	Tree(float newX,float newY,float newDy,float newZ,int topSeed){
@@ -38,14 +94,18 @@ class Horseman{
 	public float x,y,dx;
 	public int cur_frame;
 	private PImage sprite,sprite_leftward,sprite_rightward;
-	private boolean left;
+	public boolean left;
 	private float timer;
 	private float savedDx;
+
+	private float dy;
 
 	private int animState;
 	private final int WALKING = 0;
 	private final int RUNNING = 1;
   private final int TURNING = 2;
+
+	private boolean falling;
 
 	private float thewait;
 
@@ -60,10 +120,38 @@ class Horseman{
 		timer = millis();
 		left = true;
 		savedDx = 0.0;
+
+		dy = 0;
+		falling = false;
 	
 		run();
 	}
 	void draw(d){
+		if(portal != null){
+			if(left){
+				if(abs(portal.x - x) < 1){
+					dy = 10;
+					falling = true;
+				}
+			}
+			else{
+				if(abs(portal.x - x-16) < 1){
+					dy = 10;
+					falling = true;
+				}
+			}
+		}
+
+		y += dy;
+		if(y > window.innerHeight && falling){
+			y = 0;
+			falling = false;
+		}
+		if( (sbottom-34.0) - y < 21.0 && !falling){
+			y = sbottom - 34;
+			dy = 0.0;
+		}
+		
 		if(x < sleft+55 && animState != TURNING){
 			walk();
 		}
@@ -187,6 +275,7 @@ class Horseman{
 
 Tree trees[];
 Horseman horseman;
+Portal portal;
 
 void createAnimation(){
 	background(255);
@@ -202,6 +291,8 @@ void createAnimation(){
 	}
 	sbottom = max(400+55+60,sbottom);
 	
+	portal = null;
+
 	int numTrees = (int)(sright/50);
 	numTrees = numTrees % 2 == 0 ? numTrees : numTrees + 1;
 	trees = new Tree[numTrees];
@@ -225,6 +316,8 @@ void createAnimation(){
 	horseman = new Horseman(0.75*sright,sbottom-34);
 	smooth();
 	timer = millis();
+
+	portalTimer = millis();
 }
 
 void setup(){
@@ -241,9 +334,18 @@ void draw(){
 	for(int i=0;i < trees.length/2; i++){
 		trees[i].draw(delta);
 	}
+
 	noStroke();
 	fill(90,90,90);
 	quad(sleft,sbottom,sright,sbottom,sright-10,sbottom-21,sleft+10,sbottom-21);
+
+	if(millis() - portalTimer > 5000){
+		portal = new Portal(random(sright-sleft-34)+sleft+34,sbottom-11);
+		portalTimer = millis();
+	}
+	if(portal != null)
+		portal.draw(delta);
+
 	horseman.draw(delta);
 
 	for(int i=trees.length/2;i < trees.length; i++){

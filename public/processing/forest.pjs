@@ -145,9 +145,8 @@ class Horseman{
 		y += dy;
 		if(y > window.innerHeight && falling){
 			y = 0;
-			falling = false;
 		}
-		if( (sbottom-34.0) - y < 21.0 && !falling){
+		if( (sbottom-34.0) - y < 21.0 && dy > 0.0){
 			y = sbottom - 34;
 			dy = 0.0;
 		}

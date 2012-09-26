@@ -32,6 +32,25 @@
 				display: inline-block;
 				position: absolute;
 			}
+			li {
+				padding-bottom:8px;
+			}
+			body {
+				background-color white;
+				background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#EEE), color-stop(25%, white), to(white));
+				background-image: -webkit-linear-gradient(#EEE, white 25%, white);
+				background-image: -moz-linear-gradient(top, #EEE, white 25%, white);
+				background-image: -ms-linear-gradient(#EEE, white 25%, white);
+				background-image: -o-linear-gradient(#EEE, white 25%, white);
+				background-image: linear-gradient(#EEE, white 25%, white);
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+				
+				font-size: 14px;
+				line-height: 20px;
+				
+				color: #555;
+			}
 		</style>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
@@ -47,46 +66,245 @@
 		  </script>
 	  </head>
 	  <body>
-		  <canvas id="processing-canvas" data-processing-sources="/processing/forest.pjs" resize="" tabindex="0" width="0" height="0"></canvas>
-		  <div class="row">
+	  	<canvas id="processing-canvas" data-processing-sources="/processing/forest.pjs" resize="" tabindex="0" width="0" height="0"></canvas>
+			<div class="row">
 			  <div class="span6">
 		  		  <div class="content">			
 					  <h1 style="font-size:54px;">Dullahan Software</h1>
 					  <p  style="padding-top:8px;" class="lead">Embedded, mobile, and web applications.</p>
 					  <p><img src="/img/headless-horseman.png" /></p>
 					  <p><a href="mailto:chris.cacciatore@dullahansoft.com">chris.cacciatore@dullahansoft.com</a></p>
-					  <p><a href="https://twitter.com/#!/cacciatc">@cacciatc</a></p>
+					  <p><a href="https://twitter.com/#!/cacciatc" target="_new">@cacciatc</a></p>
+					  <p><a href="https://github.com/cacciatc" target="_new">Github Repos</a></p>
 				  </div>
-			</div>
+	    	  </div>
 		</div>
+
 		<section class="projects">
 			<div class="row">
-				<div class="span5">
-					<h2>Projects</h2>
-					<dl>
-						<dt><a href="http://meteor-counting.heroku.com/" target="new">Meteor Counter</a></dt>
-						<dd>A quick tutorial, an FM radio, and a tiny bit of software enables you to start counting falling stars even during the day.</dd>
-						<br/>
-						<dt><a href="http://www.hoplog.net/" target="new">Hoplog</a></dt>
-						<dd>Brew Smart.  Master your favorite beer recipes and discover new ones.</dd>
-						<br/>
-						<dt>Textabl (<a href="/pdf/textabl.pdf">PDF</a>)</dt>
-						<dd>A simple way to plan quick events.  You choose who to invite and Textabl creates a Facebook event page and invites your friends by text.  Built by a team of 5 in 48 hours and won third place at the June 2012 Sacramento <a href="http://cerealhack.com/" target="new">Cereal Hack</a>.</dd>
-						<br/>
-						<dt><a href="https://my-cycle-tracks.heroku.com/sign_in" target="new">myCycleTracks</a></dt>
-						<dd>Deploy and manage your own customized version of SFCTA's open source <a href="http://www.sfcta.org/content/view/667/377/" target="new">CycleTracks</a> and start gathering bicycle route and usage data the same day.</dd>
-						<br/>
-						<dt><a href="http://www.infraredindustries.com/infraview/" target="new">Infraview</a></dt>
-						<dd>Created for Infrared Industries.  Advanced graphing and data logging for Infrared's line of gas analyzers.</dd>
-					</dl>
-				</div>
-				<div class="span5">
-					<h2>Activity</h2>
-					<script charset="utf-8" src="http://widgets.twimg.com/j/2/widget.js"></script>
-  				<script src="/js/twitter-widget.js"></script>
+				<h2>Projects</h2>
+				<hr/>
+					<ul class="thumbnails">
+						<!-- Infraview -->
+						<li class="span4">
+							<div class="thumbnail">
+								<p align="center">
+									<a href="http://www.infraredindustries.com/infraview/" align="center">
+										<img class="img-rounded" align="center" src="img/infraview.jpeg"/>
+									</a>
+								</p>
+								<div class="caption">
+									<h3>Infraview</h3>
+									<p style="padding-top:5px;">
+										Created for Infrared Industries.  Advanced graphing and data logging for Infrared's line of gas analyzers.
+									</p>
+									<p>
+										<strong>Technologies</strong>: <span class="label label-info">VisualBasic</span> 
+																	   <span class="label label-info">C#</span>
+									</p>
+									<p>
+										<strong>Site</strong>: <a href="http://www.infraredindustries.com/infraview/" target="_new">Infraview</a>
+									</p>
+								</div>
+							</div>
+						</li>
+						
+						<!-- Thermo web server -->
+						<li class="span4">
+							<div class="thumbnail">
+								<p align="center">
+									<a href="http://dullahan-soft.github.com/thermo-server/">
+										<img class="img-rounded" height="255" 										src="https://raw.github.com/dullahan-soft/thermo-server/master/images/Thermo%20webserver%20schematic.png"/>
+									</a> 		
+								</p>
+								<div class="caption">
+									<h3>Arduino Thermo-server</h3>
+		
+									<p style="padding-top:5px;">
+										Hot water pump automation and data logging solution for a masonry heater.
+									</p>
+									<p>
+										<strong>Technologies</strong>: <span class="label label-info">Arduino</span> 
+																	   <span class="label label-info">C</span>
+									</p>
+									<p>
+										<strong>Site</strong>: <a href="http://dullahan-soft.github.com/thermo-server/" target="_new">
+											Arduino Thermo-server
+										</a>
+									</p>
+								</div>
+							</div>
+						</li>
+
+						<!-- NES.quiz -->
+						<li class="span4">
+							<div class="thumbnail">
+								<p align="center">
+									<a href="https://play.google.com/store/apps/details?id=com.dullahansoft.app.quiz" align="center">
+										<img class="img-rounded" align="center" src="img/nes-quiz-512.png"/>
+									</a>
+								</p>
+								<div class="caption">		
+									<h3>NES.quiz</h3>
+
+									<p style="padding-top:5px;">
+										A free quiz app chocked full of 8-bit NES trivia.  How well do you know your NES? 
+									</p>
+									<p>
+										<strong>Technologies</strong>: <span class="label label-info">Android</span> 
+																	   <span class="label label-info">Java</span> 
+																	   <span class="label label-info">Javascript</span>
+									</p>
+									<p>
+										<strong>Site</strong>: <a href="https://play.google.com/store/apps/details?id=com.dullahansoft.app.quiz" 																	target="_new">
+											NES.quiz
+										</a>
+									</p>
+								</div>
+							</div>
+						</li>
+
+						<!-- Meteor Counter -->
+						<li class="span4">
+							<div class="thumbnail">
+								<p align="center">
+									<a href="http://meteor-counting.heroku.com/" align="center">
+										<img class="img-rounded" align="center" src="img/count-meteor-screenshot.png"/>
+									</a>
+								</p>
+								<div class="caption">	
+									<h3>Meteor Tally</h3>
+
+									<p style="padding-top:5px;">
+										Count meteors in your browser with a FM radio and a little something we call forward meteor scatter!
+									</p>
+									<p>
+										<strong>Technologies</strong>: <span class="label label-info">Processing</span> 
+																	   <span class="label label-info">Java</span> 
+									</p>
+									<p>
+										<strong>Site</strong>: <a href="http://meteor-counting.heroku.com/" target="_new">
+											Meteor Tally
+										</a>
+									</p>
+								</div>
+							</div>
+						</li>
+						
+						<!-- Hoplog -->
+						<li class="span4">
+							<div class="thumbnail">
+								<p align="center">
+									<a href="http://www.hoplog.net/users/cacciatc" align="center">
+										<img class="img-rounded" align="center" src="img/hoplog.png"/>
+									</a>
+								</p>
+								<div class="caption">	
+									<h3>Hoplog</h3>
+
+									<p style="padding-top:5px;">
+										Brew Smart.  Master your favorite beer recipes and discover new ones.
+									</p>
+									<p>
+										<strong>Technologies</strong>: <span class="label label-info">Rails</span> 
+																	   <span class="label label-info">Javascript</span> 
+									</p>
+									<p>
+										<strong>Site</strong>: <a href="http://www.hoplog.net/users/cacciatc" target="_new">
+											Hoplog
+										</a>
+									</p>
+								</div>
+							</div>
+						</li>
+						
+						<!-- Dash -->
+						<li class="span4">
+							<div class="thumbnail">
+								<p align="center">
+									<a href="http://demo-dash.herokuapp.com/" align="center">
+										<img class="img-rounded" align="center" src="img/dash-pic.png"/>
+									</a>
+								</p>
+								<div class="caption">	
+									<h3>Dash</h3>
+
+									<p style="padding-top:5px;">
+										Client-side data visualization and logger for the Arduino Thermo-server.
+									</p>
+									<p>
+										<strong>Technologies</strong>: <span class="label label-info">Ruby</span>
+																	   <span class="label label-info">Javascript</span> 
+									</p>
+									<p>
+										<strong>Site</strong>: <a href="http://demo-dash.herokuapp.com/" target="_new">
+											Dash Demo
+										</a>
+									</p>
+								</div>
+							</div>
+						</li>
+						
+						<!-- Videosync -->
+						<li class="span4">
+							<div class="thumbnail">
+								<p align="center">
+									<a href="http://www.dot.ca.gov/newtech/operations/videosync/index.htm" align="center">
+										<img class="img-rounded" align="center" src="img/videosync.jpeg"/>
+									</a>
+								</p>
+								<div class="caption">	
+									<h3>VideoSync</h3>
+
+									<p style="padding-top:5px;">
+										While a student assistant at Caltrans R&D I worked on this tool for traffic detector analysis.
+									</p>
+									<p>
+										<strong>Technologies</strong>: <span class="label label-info">RealBasic</span>
+																	   <span class="label label-info">Ruby</span> 
+									</p>
+									<p>
+										<strong>Site</strong>: <a href="http://www.dot.ca.gov/newtech/operations/videosync/index.htm" target="_new">
+											VideoSync
+										</a>
+									</p>
+								</div>
+							</div>
+						</li>
+						
+						<!-- MyCycleTracks -->
+						<li class="span4">
+							<div class="thumbnail">
+								<p align="center">
+									<a href="https://my-cycle-tracks.heroku.com/" align="center">
+										<img class="img-rounded" align="center" src="img/mycycletracks.png"/>
+									</a>
+								</p>
+								<div class="caption">	
+									<h3>MyCycleTracks</h3>
+
+									<p style="padding-top:5px;">
+										Deploy and manage your own customized version of SFCTA's open source 
+										<a href="https://my-cycle-tracks.heroku.com/" target="new">CycleTracks</a>.
+									</p>
+									<p>
+										<strong>Technologies</strong>: <span class="label label-info">Ruby</span>
+																	   <span class="label label-info">Javscript</span>
+																	   <span class="label label-info">Android</span>
+									</p>
+									<p>
+										<strong>Site</strong>: <a href="https://my-cycle-tracks.heroku.com/" target="_new">
+											MyCycleTracks
+										</a>
+									</p>
+								</div>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</section>
+		<!--<script src="js/twitter-widget.js"></script>-->
 		<script src="/js/processing.min.js"></script>
 		<script>
 			function resizeMe(){

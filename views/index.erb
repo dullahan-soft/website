@@ -18,6 +18,18 @@
 				display: block; 
 				image-rendering: -webkit-optimize-contrast !important;
 			}
+			
+			.img-rounded {
+				height: 180px;
+			}
+			
+			.caption {
+				height:110px;
+			}
+			
+			h1, h2, h3, h4, h5, h6 {
+			  text-rendering: optimizeLegibility;
+			}
 
 			.content {
 				margin: 0px;
@@ -51,6 +63,22 @@
 				
 				color: #555;
 			}
+			
+			@media (max-width: 480px) {
+				.img-rounded {
+					height: auto;
+				}
+			
+				.caption {
+					height:auto;
+				}
+				.projects {
+					margin-top: 500px;
+					padding: 0;
+					display: inline-block;
+					position: relative;
+				}
+			}
 		</style>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 		<script type="text/javascript">
@@ -70,12 +98,15 @@
 			<div class="row">
 			  <div class="span6">
 		  		  <div class="content">			
-					  <h1 style="font-size:54px;">Dullahan Software</h1>
-					  <p  style="padding-top:8px;" class="lead">Embedded, mobile, and web applications.</p>
-					  <p><img src="/img/headless-horseman.png" /></p>
-					  <p><a href="mailto:chris.cacciatore@dullahansoft.com">chris.cacciatore@dullahansoft.com</a></p>
-					  <p><a href="https://twitter.com/#!/cacciatc" target="_new">@cacciatc</a></p>
-					  <p><a href="https://github.com/cacciatc" target="_new">Github Repos</a></p>
+					  <h1 style="font-size:68px;">Dullahan Software</h1>
+					  <p  style="padding-top:13px; padding-left:8px;" class="lead">Embedded, mobile, and web applications.</p>
+					  <p style="padding-left:8px;"><img src="/img/headless-horseman.png" /></p>
+					  <p style="padding-left:8px;">
+						  <a href="mailto:chris.cacciatore@dullahansoft.com">chris.cacciatore@dullahansoft.com</a></p>
+					  <p style="padding-left:8px;">
+						  <a href="https://twitter.com/#!/cacciatc" target="_new">@cacciatc</a></p>
+					  <p style="padding-left:8px;">
+						  <a href="https://github.com/cacciatc" target="_new">Github Repos</a></p>
 				  </div>
 	    	  </div>
 		</div>
@@ -83,14 +114,13 @@
 		<section class="projects">
 			<div class="row">
 				<h2>Projects</h2>
-				<hr/>
 					<ul class="thumbnails">
 						<!-- Infraview -->
 						<li class="span4">
 							<div class="thumbnail">
 								<p align="center">
 									<a href="http://www.infraredindustries.com/infraview/" align="center">
-										<img class="img-rounded" align="center" src="img/infraview.jpeg"/>
+										<img class="img img-rounded" align="center" src="img/infraview.jpeg"/>
 									</a>
 								</p>
 								<div class="caption">
